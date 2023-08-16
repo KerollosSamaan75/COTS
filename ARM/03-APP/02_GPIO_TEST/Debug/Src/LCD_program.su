@@ -1,0 +1,11 @@
+../Src/LCD_program.c:24:6:_delay_ms	24	static,ignoring_inline_asm
+../Src/LCD_program.c:34:6:LCD_voidInit	8	static
+../Src/LCD_program.c:153:6:LCD_voidSendCmnd	16	static
+../Src/LCD_program.c:181:6:LCD_voidSendChar	16	static
+../Src/LCD_program.c:210:6:LCD_voidSendStr	24	static
+../Src/LCD_program.c:220:6:LCD_voidSendNum	40	static
+../Src/LCD_program.c:244:4:LCD_u8GoToXY	24	static
+../Src/LCD_program.c:265:6:LCD_voidClearScreen	8	static
+../Src/LCD_program.c:271:4:LCD_u8SendSpecialChar	24	static
+../Src/LCD_program.c:301:6:LCD_voidShiftRight	8	static
+../Src/LCD_program.c:307:6:LCD_voidShiftLeft	8	static

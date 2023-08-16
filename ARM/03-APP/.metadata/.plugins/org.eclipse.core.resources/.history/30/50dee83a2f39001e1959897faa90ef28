@@ -1,0 +1,311 @@
+   /******************************************/
+/********** name    : kerollos samaan *****/
+/********** date    : 10/9/2022       *****/
+/********** SWC     : LCD             *****/
+/********** verison : v-1             *****/
+/******************************************/
+
+/*lib*/
+#include "STD_TYPES.h"
+#include "BIT_MATH.h"
+#ifndef	F_CPU
+#define  F_CPU 8000000UL
+#endif
+
+
+/*MCAL*/
+#include "GPIO_interface.h"
+
+/*HAL*/
+#include "LCD_interface.h"
+#include "LCD_private.h"
+#include "LCD_config.h"
+
+void	_delay_ms(u32 ticks)
+{
+	u32 i;
+	for( i = 0; i < (ticks * 500) ; i++)
+	{
+		asm("NOP");
+	}
+}
+
+
+void LCD_voidInit(void)
+{
+
+	    _delay_ms(35);
+		//FIRST 4 BITS SENT (function set)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+
+		//FIRST 4 BITS SENT (function set)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_HIGH);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_LOW);
+
+
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+
+		//SECOND 4 BITS SENT (function set)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_HIGH);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_LOW);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+
+		//last 3 bits
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_HIGH);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+
+
+		_delay_ms(35);
+		// FIRST 4 BITS (display on/off control)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_LOW);
+
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(1);
+
+		// SECOND 4 BITS (display on/off control)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW); //B
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_LOW); //C
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_HIGH); //D
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_HIGH);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(35);
+		//FIRST 4 BITS (display clear)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_LOW);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(1);
+
+		//SECOND  4 BITS (display clear)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_HIGH);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(35);
+
+		//FIRST 4 BITS (entry mode set)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_LOW);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(1);
+
+		//SECOND 4 BITS (entry mode set)
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GPIO_u8_LOW);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GPIO_u8_HIGH);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GPIO_u8_HIGH);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GPIO_u8_LOW);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_HIGH);
+		_delay_ms(2);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN ,GPIO_u8_LOW);
+		_delay_ms(1);
+
+}
+
+void LCD_voidSendCmnd(u8  Copy_u8Cmnd)
+{
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_LOW);
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN,GPIO_u8_LOW);
+
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GET_BIT(Copy_u8Cmnd,4));
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GET_BIT(Copy_u8Cmnd,5));
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GET_BIT(Copy_u8Cmnd,6));
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GET_BIT(Copy_u8Cmnd,7));
+
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_HIGH);
+		_delay_ms(2);
+
+		//second 4 bits
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_LOW);
+		_delay_ms(2);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GET_BIT(Copy_u8Cmnd,0));
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GET_BIT(Copy_u8Cmnd,1));
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GET_BIT(Copy_u8Cmnd,2));
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GET_BIT(Copy_u8Cmnd,3));
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_HIGH);
+		_delay_ms(2);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_LOW);
+		_delay_ms(2);
+}
+
+void LCD_voidSendChar(u8 Copy_u8Char)
+{
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_LOW);
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_RS_PIN,GPIO_u8_HIGH);
+
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GET_BIT(Copy_u8Char,4));
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GET_BIT(Copy_u8Char,5));
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GET_BIT(Copy_u8Char,6));
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GET_BIT(Copy_u8Char,7));
+
+	DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_HIGH);
+		_delay_ms(2);
+
+		//second 4 bits
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_LOW);
+		_delay_ms(2);
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB4_PIN,GET_BIT(Copy_u8Char,0));
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB5_PIN,GET_BIT(Copy_u8Char,1));
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB6_PIN,GET_BIT(Copy_u8Char,2));
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_DB7_PIN,GET_BIT(Copy_u8Char,3));
+
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_HIGH);
+		_delay_ms(2);
+		DIO_voidSetPinValue(LCD_DATA_PORT,LCD_EN_PIN,GPIO_u8_LOW);
+		_delay_ms(2);
+
+}
+
+void LCD_voidSendStr(u8* Copy_pu8Str )
+{
+	u8 Local_u8StrLen = 0;
+	while( Copy_pu8Str[Local_u8StrLen] != '\0')
+	{
+		LCD_voidSendChar ( Copy_pu8Str[Local_u8StrLen] );
+		Local_u8StrLen++;
+	}
+}
+
+void LCD_voidSendNum (u32  Copy_u32Num )
+{
+    u8 Local_u8NumArr[10]= {0};
+	u8 Local_u8ArrIndex = 0;
+	if(Copy_u32Num == 0)
+	{
+		LCD_voidSendChar('0');
+	}
+	else
+	{
+		while(Copy_u32Num > 0)
+		{
+			Local_u8NumArr[Local_u8ArrIndex] = (Copy_u32Num % 10);
+			Copy_u32Num /=10;
+			Local_u8ArrIndex++;
+		}
+		for (int i = Local_u8ArrIndex-1 ; i>=0 ;i--)
+		{
+			LCD_voidSendChar( Local_u8NumArr[i] + '0');
+		}
+	}
+}
+
+
+u8 LCD_u8GoToXY (u8 Copy_u8LineNum , u8 Copy_u8Location)
+{
+	u8 Local_u8ErrorState = STD_TYPES_OK;
+	if (Copy_u8Location <= 39)
+	{
+		switch (Copy_u8LineNum)
+		{
+			case LCD_u8_LINE_1   : LCD_voidSendCmnd (0x80 + Copy_u8Location); break;
+			case LCD_u8_LINE_2   : LCD_voidSendCmnd (0xc0 + Copy_u8Location); break;
+			case LCD_u8_LINE_3   : LCD_voidSendCmnd (0x94 + Copy_u8Location); break;
+			case LCD_u8_LINE_4   : LCD_voidSendCmnd (0xD4 + Copy_u8Location); break;
+			default              : Local_u8ErrorState = STD_TYPES_NOK;
+		}
+	}
+	else
+	{
+		Local_u8ErrorState = STD_TYPES_NOK;
+	}
+	return Local_u8ErrorState;
+}
+
+void LCD_voidClearScreen (void)
+{
+	LCD_voidSendCmnd (0x01);
+	_delay_ms (2);
+}
+
+u8 LCD_u8SendSpecialChar    (u8 Copy_u8CharNum , u8* Copy_pu8CharShape ,u8  Copy_u8LineNum , u8 Copy_u8Location )
+{
+	u8 Local_u8ErrorState = STD_TYPES_OK;
+	if((Copy_u8CharNum <= 7)&&(Copy_u8Location <= 39)&&(Copy_u8LineNum <=4))
+	{
+		switch(Copy_u8CharNum)
+		{
+			case 0:LCD_voidSendCmnd(0b01000000); break; //0
+			case 1:LCD_voidSendCmnd(0b01001000); break; //8
+			case 2:LCD_voidSendCmnd(0b01010000); break; //16
+			case 3:LCD_voidSendCmnd(0b01011000); break; //24
+			case 4:LCD_voidSendCmnd(0b01100000); break; //32
+			case 5:LCD_voidSendCmnd(0b01101000); break; //40
+			case 6:LCD_voidSendCmnd(0b01110000); break; //48
+			case 7:LCD_voidSendCmnd(0b01111000); break; //56
+		}
+		for(int i=0 ;i <8 ;i++)
+		{
+		   LCD_voidSendChar(Copy_pu8CharShape[i]);
+		}
+	    LCD_u8GoToXY(Copy_u8LineNum ,Copy_u8Location );
+		LCD_voidSendChar(Copy_u8CharNum);
+	}
+	else
+	{
+	  Local_u8ErrorState = STD_TYPES_NOK;
+	}
+	return Local_u8ErrorState;
+}
+
+void LCD_voidShiftRight(void)
+{
+	LCD_voidSendCmnd(0b00011100);
+	_delay_ms(100);
+}
+
+void LCD_voidShiftLeft(void)
+{
+	LCD_voidSendCmnd(0b00011000);
+	_delay_ms(100);
+}

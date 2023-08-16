@@ -1,0 +1,24 @@
+#include "STD_TYPES.h"
+#include "BIT_MATH.h"
+
+#include "RCC_interface.h"
+#include "GPIO_interface.h"
+#include "LCD_interface.h"
+
+
+
+int main(void)
+{
+	u8 str[5] = "KERO";
+	RCC_voidInitSystemClock();
+	RCC_voidEnableClock(RCC_AHB, AHB_IOPA_EN);
+	DIO_voidSetPinDirection(DIO_u8_PORTA, DIO_u8_PIN8, OUTPUT_PUSH_PULL_LOW_SPEED);
+	DIO_voidSetPinDirection(DIO_u8_PORTA, DIO_u8_PIN9, OUTPUT_PUSH_PULL_LOW_SPEED);
+	DIO_voidSetPinDirection(DIO_u8_PORTA, DIO_u8_PIN4, OUTPUT_PUSH_PULL_LOW_SPEED);
+	DIO_voidSetPinDirection(DIO_u8_PORTA, DIO_u8_PIN5, OUTPUT_PUSH_PULL_LOW_SPEED);
+	DIO_voidSetPinDirection(DIO_u8_PORTA, DIO_u8_PIN6, OUTPUT_PUSH_PULL_LOW_SPEED);
+	DIO_voidSetPinDirection(DIO_u8_PORTA, DIO_u8_PIN7, OUTPUT_PUSH_PULL_LOW_SPEED);
+	LCD_voidInit();
+	LCD_voidSendStr("KERO SAMAAN");
+	while(1);
+}

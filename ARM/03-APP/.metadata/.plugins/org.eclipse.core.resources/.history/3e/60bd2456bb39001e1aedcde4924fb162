@@ -1,0 +1,29 @@
+#include "STD_TYPES.h"
+#include "BIT_MATH.h"
+
+#include "RCC_interface.h"
+#include "GPIO_interface.h"
+#include "LCD_interface.h"
+
+
+
+int main(void)
+{
+	RCC_voidInitSystemClock();
+	RCC_voidEnableClock(RCC_AHB, AHB_IOPA_EN);
+	RCC_voidEnableClock(RCC_AHB, AHB_IOPC_EN);
+	DIO_voidSetPinDirection(DIO_u8_PORTC, DIO_u8_PIN13, INPUT_PULL_UP);
+	DIO_voidSetPinDirection(DIO_u8_PORTA, DIO_u8_PIN5, OUTPUT_PUSH_PULL_LOW_SPEED);
+
+	while(1)
+	{
+		if(DIO_u8GetPinValue(DIO_u8_PORTC, DIO_u8_PIN13))
+		{
+			DIO_voidSetPinValue(DIO_u8_PORTA, DIO_u8_PIN5, DIO_u8_HIGH);
+		}
+		else
+		{
+			DIO_voidSetPinValue(DIO_u8_PORTA, DIO_u8_PIN5, DIO_u8_LOW);
+		}
+	}
+}

@@ -1,0 +1,32 @@
+/******************************************/
+/********** name    : kerollos samaan *****/
+/********** date    : 10/9/2022        *****/
+/********** SWC     : LCD             *****/
+/********** verison : v-1             *****/
+/******************************************/
+
+#ifndef LCD_CONFIG_H
+#define LCD_CONFIG_H
+
+
+
+#define LCD_DATA_PORT    DIO_u8_PORTA
+
+#define LCD_RS_PIN        PIN8
+#define LCD_EN_PIN        PIN9
+#define LCD_DB4_PIN       PIN4
+#define LCD_DB5_PIN       PIN5
+#define LCD_DB6_PIN       PIN6
+#define LCD_DB7_PIN       PIN7
+
+/*Option 1-CURSOR_ENABLE
+         2-CURSOR_DISABLE */
+
+#define CURSOR_DISPLAY    CURSOR_DISABLE
+/*****************************************************************************************************************************/
+/*****************************************************************************************************************************/
+/*Option 1-CURSOR_BLINK_ON
+         2-CURSOR_BLINK_OFF */
+
+#define CURSOR_BLINK  	CURSOR_BLINK_OFF
+#endif

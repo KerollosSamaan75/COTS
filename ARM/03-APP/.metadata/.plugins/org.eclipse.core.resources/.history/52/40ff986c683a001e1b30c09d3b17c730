@@ -1,0 +1,380 @@
+/**********************************************************************/
+/********************  Author : Kerollos Samaan  **********************/
+/********************  Date   : 13/08/2023       **********************/
+/********************  Version: V1.0             **********************/
+/**********************************************************************/
+#include "STD_TYPES.h"
+#include "BIT_MATH.h"
+
+#include "EXTI_interface.h"
+#include "EXTI_private.h"
+#include "EXTI_config.h"
+
+void EXTI_Init(void)
+{
+	#ifndef SYSCFG_EXTICR1
+    #define SYSCFG_EXTICR1       (*((volatile u32*)(0x40010000 + 0x08)))        	
+    #endif
+	
+	#ifndef SYSCFG_EXTICR2
+    #define SYSCFG_EXTICR2       (*((volatile u32*)(0x40010000 + 0x0C)))        	
+    #endif
+	
+	#ifndef SYSCFG_EXTICR3
+    #define SYSCFG_EXTICR3       (*((volatile u32*)(0x40010000 + 0x10)))         	
+    #endif
+	
+	#ifndef SYSCFG_EXTICR4
+    #define SYSCFG_EXTICR4       (*((volatile u32*)(0x40010000 + 0x14)))         	
+    #endif
+	
+	#if   EXTI0 == LINE0_PA0
+		  CLR_BIT(SYSCFG_EXTICR1,0);
+		  CLR_BIT(SYSCFG_EXTICR1,1);
+		  CLR_BIT(SYSCFG_EXTICR1,2);
+		  CLR_BIT(SYSCFG_EXTICR1,3);
+		  
+	#elif EXTI0 == LINE0_PB0
+		  SET_BIT(SYSCFG_EXTICR1,0);
+		  CLR_BIT(SYSCFG_EXTICR1,1);
+		  CLR_BIT(SYSCFG_EXTICR1,2);
+		  CLR_BIT(SYSCFG_EXTICR1,3);
+		  
+	#elif EXTI0 == LINE0_PC0
+		  CLR_BIT(SYSCFG_EXTICR1,0);
+		  SET_BIT(SYSCFG_EXTICR1,1);
+		  CLR_BIT(SYSCFG_EXTICR1,2);
+		  CLR_BIT(SYSCFG_EXTICR1,3);
+	#endif
+	
+	
+	#if   EXTI1 == LINE1_PA1
+		  CLR_BIT(SYSCFG_EXTICR1,4);
+		  CLR_BIT(SYSCFG_EXTICR1,5);
+		  CLR_BIT(SYSCFG_EXTICR1,6);
+		  CLR_BIT(SYSCFG_EXTICR1,7);
+		  
+	#elif EXTI1 == LINE1_PB1
+		  SET_BIT(SYSCFG_EXTICR1,4);
+		  CLR_BIT(SYSCFG_EXTICR1,5);
+		  CLR_BIT(SYSCFG_EXTICR1,6);
+		  CLR_BIT(SYSCFG_EXTICR1,7);
+		  
+	#elif EXTI1 == LINE1_PC1
+		  CLR_BIT(SYSCFG_EXTICR1,4);
+		  SET_BIT(SYSCFG_EXTICR1,5);
+		  CLR_BIT(SYSCFG_EXTICR1,6);
+		  CLR_BIT(SYSCFG_EXTICR1,7);
+	#endif
+	
+	#if   EXTI2 == LINE2_PA2
+		  CLR_BIT(SYSCFG_EXTICR1,8);
+		  CLR_BIT(SYSCFG_EXTICR1,9);
+		  CLR_BIT(SYSCFG_EXTICR1,10);
+		  CLR_BIT(SYSCFG_EXTICR1,11);
+		  
+	#elif EXTI2 == LINE2_PB2
+		  SET_BIT(SYSCFG_EXTICR1,8);
+		  CLR_BIT(SYSCFG_EXTICR1,9);
+		  CLR_BIT(SYSCFG_EXTICR1,10);
+		  CLR_BIT(SYSCFG_EXTICR1,11);
+		  
+	#elif EXTI2 == LINE2_PC2
+		  CLR_BIT(SYSCFG_EXTICR1,8);
+		  SET_BIT(SYSCFG_EXTICR1,9);
+		  CLR_BIT(SYSCFG_EXTICR1,10);
+		  CLR_BIT(SYSCFG_EXTICR1,11);
+	#endif
+	
+	#if   EXTI3 == LINE3_PA3
+		  CLR_BIT(SYSCFG_EXTICR1,12);
+		  CLR_BIT(SYSCFG_EXTICR1,13);
+		  CLR_BIT(SYSCFG_EXTICR1,14);
+		  CLR_BIT(SYSCFG_EXTICR1,15);
+		  
+	#elif EXTI3 == LINE3_PB3
+		  SET_BIT(SYSCFG_EXTICR1,12);
+		  CLR_BIT(SYSCFG_EXTICR1,13);
+		  CLR_BIT(SYSCFG_EXTICR1,14);
+		  CLR_BIT(SYSCFG_EXTICR1,15);
+		  
+	#elif EXTI3 == LINE3_PC3
+		  CLR_BIT(SYSCFG_EXTICR1,12);
+		  SET_BIT(SYSCFG_EXTICR1,13);
+		  CLR_BIT(SYSCFG_EXTICR1,14);
+		  CLR_BIT(SYSCFG_EXTICR1,15);
+	#endif
+	/****************************************************************************************************************/
+	/****************************************************************************************************************/
+	#if   EXTI4 == LINE4_PA4
+		  CLR_BIT(SYSCFG_EXTICR2,0);
+		  CLR_BIT(SYSCFG_EXTICR2,1);
+		  CLR_BIT(SYSCFG_EXTICR2,2);
+		  CLR_BIT(SYSCFG_EXTICR2,3);
+							   
+	#elif EXTI4 == LINE4_PB4   
+		  SET_BIT(SYSCFG_EXTICR2,0);
+		  CLR_BIT(SYSCFG_EXTICR2,1);
+		  CLR_BIT(SYSCFG_EXTICR2,2);
+		  CLR_BIT(SYSCFG_EXTICR2,3);
+							   
+	#elif EXTI4 == LINE4_PC4   
+		  CLR_BIT(SYSCFG_EXTICR2,0);
+		  SET_BIT(SYSCFG_EXTICR2,1);
+		  CLR_BIT(SYSCFG_EXTICR2,2);
+		  CLR_BIT(SYSCFG_EXTICR2,3);
+	#endif                     
+							   
+							   
+	#if   EXTI5 == LINE5_PA5   
+		  CLR_BIT(SYSCFG_EXTICR2,4);
+		  CLR_BIT(SYSCFG_EXTICR2,5);
+		  CLR_BIT(SYSCFG_EXTICR2,6);
+		  CLR_BIT(SYSCFG_EXTICR2,7);
+							   
+	#elif EXTI5 == LINE5_PB5   
+		  SET_BIT(SYSCFG_EXTICR2,4);
+		  CLR_BIT(SYSCFG_EXTICR2,5);
+		  CLR_BIT(SYSCFG_EXTICR2,6);
+		  CLR_BIT(SYSCFG_EXTICR2,7);
+							   
+	#elif EXTI5 == LINE5_PC5   
+		  CLR_BIT(SYSCFG_EXTICR2,4);
+		  SET_BIT(SYSCFG_EXTICR2,5);
+		  CLR_BIT(SYSCFG_EXTICR2,6);
+		  CLR_BIT(SYSCFG_EXTICR2,7);
+	#endif                     
+							   
+	#if   EXTI6 == LINE6_PA6   
+		  CLR_BIT(SYSCFG_EXTICR2,8);
+		  CLR_BIT(SYSCFG_EXTICR2,9);
+		  CLR_BIT(SYSCFG_EXTICR2,10);
+		  CLR_BIT(SYSCFG_EXTICR2,11);
+							   
+	#elif EXTI6 == LINE6_PB6   
+		  SET_BIT(SYSCFG_EXTICR2,8);
+		  CLR_BIT(SYSCFG_EXTICR2,9);
+		  CLR_BIT(SYSCFG_EXTICR2,10);
+		  CLR_BIT(SYSCFG_EXTICR2,11);
+							   
+	#elif EXTI6 == LINE6_PC6   
+		  CLR_BIT(SYSCFG_EXTICR2,8);
+		  SET_BIT(SYSCFG_EXTICR2,9);
+		  CLR_BIT(SYSCFG_EXTICR2,10);
+		  CLR_BIT(SYSCFG_EXTICR2,11);
+	#endif                     
+							   
+	#if   EXTI7 == LINE7_PA7   
+		  CLR_BIT(SYSCFG_EXTICR2,12);
+		  CLR_BIT(SYSCFG_EXTICR2,13);
+		  CLR_BIT(SYSCFG_EXTICR2,14);
+		  CLR_BIT(SYSCFG_EXTICR2,15);
+							   
+	#elif EXTI7 == LINE7_PB7   
+		  SET_BIT(SYSCFG_EXTICR2,12);
+		  CLR_BIT(SYSCFG_EXTICR2,13);
+		  CLR_BIT(SYSCFG_EXTICR2,14);
+		  CLR_BIT(SYSCFG_EXTICR2,15);
+							   
+	#elif EXTI7 == LINE7_PC7  
+		  CLR_BIT(SYSCFG_EXTICR2,12);
+		  SET_BIT(SYSCFG_EXTICR2,13);
+		  CLR_BIT(SYSCFG_EXTICR2,14);
+		  CLR_BIT(SYSCFG_EXTICR2,15);
+	#endif
+	/***************************************************************************************/
+	/***************************************************************************************/
+	#if   EXTI8 == LINE8_PA8
+		  CLR_BIT(SYSCFG_EXTICR3,0);
+		  CLR_BIT(SYSCFG_EXTICR3,1);
+		  CLR_BIT(SYSCFG_EXTICR3,2);
+		  CLR_BIT(SYSCFG_EXTICR3,3);
+							   
+	#elif EXTI8 == LINE8_PB8   
+		  SET_BIT(SYSCFG_EXTICR3,0);
+		  CLR_BIT(SYSCFG_EXTICR3,1);
+		  CLR_BIT(SYSCFG_EXTICR3,2);
+		  CLR_BIT(SYSCFG_EXTICR3,3);
+							   
+	#elif EXTI8 == LINE8_PC8   
+		  CLR_BIT(SYSCFG_EXTICR3,0);
+		  SET_BIT(SYSCFG_EXTICR3,1);
+		  CLR_BIT(SYSCFG_EXTICR3,2);
+		  CLR_BIT(SYSCFG_EXTICR3,3);
+	#endif                     
+							   
+							   
+	#if   EXTI9 == LINE9_PA9   
+		  CLR_BIT(SYSCFG_EXTICR3,4);
+		  CLR_BIT(SYSCFG_EXTICR3,5);
+		  CLR_BIT(SYSCFG_EXTICR3,6);
+		  CLR_BIT(SYSCFG_EXTICR3,7);
+							   
+	#elif EXTI9 == LINE9_PB9   
+		  SET_BIT(SYSCFG_EXTICR3,4);
+		  CLR_BIT(SYSCFG_EXTICR3,5);
+		  CLR_BIT(SYSCFG_EXTICR3,6);
+		  CLR_BIT(SYSCFG_EXTICR3,7);
+							   
+	#elif EXTI9 == LINE9_PC9   
+		  CLR_BIT(SYSCFG_EXTICR3,4);
+		  SET_BIT(SYSCFG_EXTICR3,5);
+		  CLR_BIT(SYSCFG_EXTICR3,6);
+		  CLR_BIT(SYSCFG_EXTICR3,7);
+	#endif                     
+							   
+	#if   EXTI10 == LINE10_PA10   
+		  CLR_BIT(SYSCFG_EXTICR3,8);
+		  CLR_BIT(SYSCFG_EXTICR3,9);
+		  CLR_BIT(SYSCFG_EXTICR3,10);
+		  CLR_BIT(SYSCFG_EXTICR3,11);
+							   
+	#elif EXTI10 == LINE10_PB10   
+		  SET_BIT(SYSCFG_EXTICR3,8);
+		  CLR_BIT(SYSCFG_EXTICR3,9);
+		  CLR_BIT(SYSCFG_EXTICR3,10);
+		  CLR_BIT(SYSCFG_EXTICR3,11);
+							   
+	#elif EXTI10 == LINE10_PC10   
+		  CLR_BIT(SYSCFG_EXTICR3,8);
+		  SET_BIT(SYSCFG_EXTICR3,9);
+		  CLR_BIT(SYSCFG_EXTICR3,10);
+		  CLR_BIT(SYSCFG_EXTICR3,11);
+	#endif                     
+							   
+	#if   EXTI11 == LINE11_PA11   
+		  CLR_BIT(SYSCFG_EXTICR3,12);
+		  CLR_BIT(SYSCFG_EXTICR3,13);
+		  CLR_BIT(SYSCFG_EXTICR3,14);
+		  CLR_BIT(SYSCFG_EXTICR3,15);
+							   
+	#elif EXTI11 == LINE11_PB11   
+		  SET_BIT(SYSCFG_EXTICR3,12);
+		  CLR_BIT(SYSCFG_EXTICR3,13);
+		  CLR_BIT(SYSCFG_EXTICR3,14);
+		  CLR_BIT(SYSCFG_EXTICR3,15);
+							   
+	#elif EXTI11 == LINE11_PC11   
+		  CLR_BIT(SYSCFG_EXTICR3,12);
+		  SET_BIT(SYSCFG_EXTICR3,13);
+		  CLR_BIT(SYSCFG_EXTICR3,14);
+		  CLR_BIT(SYSCFG_EXTICR3,15);
+	#endif
+	/**************************************************************************************************/
+	/**************************************************************************************************/
+
+	#if   EXTI12 == LINE12_PA12
+		  CLR_BIT(SYSCFG_EXTICR4,0);
+		  CLR_BIT(SYSCFG_EXTICR4,1);
+		  CLR_BIT(SYSCFG_EXTICR4,2);
+		  CLR_BIT(SYSCFG_EXTICR4,3);
+							   
+	#elif EXTI12 == LINE12_PB12   
+		  SET_BIT(SYSCFG_EXTICR4,0);
+		  CLR_BIT(SYSCFG_EXTICR4,1);
+		  CLR_BIT(SYSCFG_EXTICR4,2);
+		  CLR_BIT(SYSCFG_EXTICR4,3);
+							   
+	#elif EXTI12 == LINE12_PC12   
+		  CLR_BIT(SYSCFG_EXTICR4,0);
+		  SET_BIT(SYSCFG_EXTICR4,1);
+		  CLR_BIT(SYSCFG_EXTICR4,2);
+		  CLR_BIT(SYSCFG_EXTICR4,3);
+	#endif                     
+							   
+							   
+	#if   EXTI13 == LINE13_PA13   
+		  CLR_BIT(SYSCFG_EXTICR4,4);
+		  CLR_BIT(SYSCFG_EXTICR4,5);
+		  CLR_BIT(SYSCFG_EXTICR4,6);
+		  CLR_BIT(SYSCFG_EXTICR4,7);
+							   
+	#elif EXTI13 == LINE13_PB13   
+		  SET_BIT(SYSCFG_EXTICR4,4);
+		  CLR_BIT(SYSCFG_EXTICR4,5);
+		  CLR_BIT(SYSCFG_EXTICR4,6);
+		  CLR_BIT(SYSCFG_EXTICR4,7);
+							   
+	#elif EXTI13 == LINE13_PC13   
+		  CLR_BIT(SYSCFG_EXTICR4,4);
+		  SET_BIT(SYSCFG_EXTICR4,5);
+		  CLR_BIT(SYSCFG_EXTICR4,6);
+		  CLR_BIT(SYSCFG_EXTICR4,7);
+	#endif                     
+							   
+	#if   EXTI14 == LINE14_PA14  
+		  CLR_BIT(SYSCFG_EXTICR4,8);
+		  CLR_BIT(SYSCFG_EXTICR4,9);
+		  CLR_BIT(SYSCFG_EXTICR4,10);
+		  CLR_BIT(SYSCFG_EXTICR4,11);
+							   
+	#elif EXTI14 == LINE14_PB14 
+		  SET_BIT(SYSCFG_EXTICR4,8);
+		  CLR_BIT(SYSCFG_EXTICR4,9);
+		  CLR_BIT(SYSCFG_EXTICR4,10);
+		  CLR_BIT(SYSCFG_EXTICR4,11);
+							   
+	#elif EXTI14 == LINE14_PC14 
+		  CLR_BIT(SYSCFG_EXTICR4,8);
+		  SET_BIT(SYSCFG_EXTICR4,9);
+		  CLR_BIT(SYSCFG_EXTICR4,10);
+		  CLR_BIT(SYSCFG_EXTICR4,11);
+	#endif                     
+							   
+	#if   EXTI15 == LINE15_PA15  
+		  CLR_BIT(SYSCFG_EXTICR4,12);
+		  CLR_BIT(SYSCFG_EXTICR4,13);
+		  CLR_BIT(SYSCFG_EXTICR4,14);
+		  CLR_BIT(SYSCFG_EXTICR4,15);
+							   
+	#elif EXTI15 == LINE15_PB15 
+		  SET_BIT(SYSCFG_EXTICR4,12);
+		  CLR_BIT(SYSCFG_EXTICR4,13);
+		  CLR_BIT(SYSCFG_EXTICR4,14);
+		  CLR_BIT(SYSCFG_EXTICR4,15);
+							   
+	#elif EXTI15 == LINE15_PC15  
+		  CLR_BIT(SYSCFG_EXTICR4,12);
+		  SET_BIT(SYSCFG_EXTICR4,13);
+		  CLR_BIT(SYSCFG_EXTICR4,14);
+		  CLR_BIT(SYSCFG_EXTICR4,15);
+	#endif
+	
+}
+
+void EXTI_voidEnableLine (u8 Copy_u8Line_Num)
+{
+	if(Copy_u8Line_Num <=15)
+	{
+		SET_BIT(EXTI->IMR1 ,Copy_u8Line_Num);
+	}
+	
+}
+
+void EXTI_voidDisableLine (u8 Copy_u8Line_Num);
+{
+	if(Copy_u8Line_Num <=15)
+	{
+		CLR_BIT(EXTI->IMR1 ,Copy_u8Line_Num);
+	}
+}
+
+void EXTI_voidSetSenseMood (u8 Copy_u8Line_Num ,u8 Copy_u8SenseMood);
+{
+	if(Copy_u8Line_Num <=15)
+	{
+		switch(Copy_u8SenseMood)
+		{
+			case RISING_TRIGGER     : SET_BIT(EXTI->RTSR1 ,Copy_u8Line_Num); break;
+			
+			case FALLING_TRIGGER    : SET_BIT(EXTI->FTSR1 ,Copy_u8Line_Num); break;
+			
+			case ON_CHANGE_TRIGGER  : SET_BIT(EXTI->RTSR1 ,Copy_u8Line_Num);
+			                          SET_BIT(EXTI->FTSR1 ,Copy_u8Line_Num); break;
+		}
+	}
+}
+
+
+
+

@@ -1,0 +1,21 @@
+12:27:31 **** Incremental Build of configuration Debug for project 03_NVIC_TEST ****
+make -j4 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F3 -DSTM32F303RETx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "03_NVIC_TEST.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\Courses\Kerollos\02- ARM\02- ARM\WorkSpace\03-APP\03_NVIC_TEST\STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="03_NVIC_TEST.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 03_NVIC_TEST.elf
+ 
+arm-none-eabi-size   03_NVIC_TEST.elf 
+arm-none-eabi-objdump -h -S  03_NVIC_TEST.elf  > "03_NVIC_TEST.list"
+   text	   data	    bss	    dec	    hex	filename
+   7744	     12	   1564	   9320	   2468	03_NVIC_TEST.elf
+Finished building: default.size.stdout
+ 
+Finished building: 03_NVIC_TEST.list
+ 
+12:27:40 **** Incremental Build of configuration Debug for project 03_NVIC_TEST ****
+make -j4 all 
+arm-none-eabi-size   03_NVIC_TEST.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7744	     12	   1564	   9320	   2468	03_NVIC_TEST.elf
+Finished building: default.size.stdout
+ 

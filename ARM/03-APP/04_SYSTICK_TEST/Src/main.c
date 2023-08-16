@@ -1,0 +1,35 @@
+#include "STD_TYPES.h"
+#include "BIT_MATH.h"
+
+#include "RCC_interface.h"
+#include "GPIO_interface.h"
+#include "SYSTICK_interface.h"
+
+#include "LCD_interface.h"
+
+
+void Print(void);
+
+
+int main(void)
+{
+	RCC_voidInitSystemClock();
+	RCC_voidEnableClock(RCC_AHB, AHB_IOPA_EN);
+	LCD_voidInit();
+	SYSTICK_voidInit();
+	SYSTICK_voidSetReloadValue(1000000);
+	SYSTICK_voidSetCallBack(Print);
+	SYSTICK_voidEnableTimer();
+	SYSTICK_voidEnableInterrupt();
+
+	while(1);
+
+}
+
+
+void Print(void)
+{
+	static u8 Count = 0;
+	LCD_voidSendNum(Count);
+	Count++;
+}

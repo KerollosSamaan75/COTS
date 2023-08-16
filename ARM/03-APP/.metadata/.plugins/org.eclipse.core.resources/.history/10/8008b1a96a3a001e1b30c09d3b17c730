@@ -1,0 +1,47 @@
+#include "STD_TYPES.h"
+#include "BIT_MATH.h"
+
+#include "RCC_interface.h"
+#include "GPIO_interface.h"
+#include "NVIC_interface.h"
+
+#include "LCD_interface.h"
+#include "EXTI_interface.h"
+
+
+
+int main(void)
+{
+	RCC_voidInitSystemClock();
+	RCC_voidEnableClock(RCC_AHB, AHB_IOPA_EN);
+	RCC_voidEnableClock(RCC_APB2, APB2_SYSCFG_EN);
+	LCD_voidInit();
+	NVIC_voidInit();
+	EXTI_Init();
+	DIO_voidSetPinDirection(DIO_u8_PORTA,DIO_u8_PIN0, INPUT_PULL_UP);
+	EXTI_voidSetSenseMood(EXTI_LINE_0, EXTI_FALLING_TRIGGER);
+	EXTI_voidEnableLine(EXTI_LINE_0);
+	NVIC_voidEnableInterrupt(6);
+//	NVIC_voidEnableInterrupt(6);
+//	NVIC_voidSetPriority(6, 0b1111);  //EXTI0
+//
+//	NVIC_voidEnableInterrupt(7);
+//	NVIC_voidSetPriority(7, 0b0011);  //EXTI1
+//
+//	NVIC_voidSetPendingFlag(6);
+
+	while(1);
+
+}
+
+
+void EXTI0_IRQHandler()
+{
+	//NVIC_voidSetPendingFlag(7);
+	LCD_voidSendStr("KERO");
+}
+
+//void EXTI1_IRQHandler()
+//{
+//	LCD_voidSendNum(1);
+//}

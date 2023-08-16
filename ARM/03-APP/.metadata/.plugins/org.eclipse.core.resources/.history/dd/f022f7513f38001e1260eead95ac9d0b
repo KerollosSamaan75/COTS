@@ -1,0 +1,17 @@
+#include "STD_TYPES.h"
+#include "BIT_MATH.h"
+
+#include "RCC_interface.h"
+
+#define   GPIOA_MODER     0x48000000
+#define   GPIOA_OTYPER    0x48000014
+int main(void)
+{
+	RCC_voidInitSystemClock();
+	RCC_voidEnableClock(RCC_AHB, 17);
+	GPIOA_MODER = 1<<10;
+	GPIOA_OTYPER =1<<5;
+
+    while(1);
+
+}
